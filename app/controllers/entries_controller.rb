@@ -5,6 +5,8 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = Entry.all
+    @commentsWhereEntryIdIs1 = Comment.select(:id, :body, :status, :entry_id).where(entry_id: 1)
+    @entriesWhereCommentStatusIsUnapproved = Entry.select('entries.id, entries.title, entries.body').joins(:comments).where(comments: {status: 'unapproved'} )
   end
 
   # GET /entries/1

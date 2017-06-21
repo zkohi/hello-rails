@@ -26,4 +26,52 @@
 
 <br>
 
+<h2>Entryのid:1(title:はじめてのエントリー)に紐づくComment</h2>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>body</th>
+      <th>status</th>
+      <th>entry_id</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commentsWhereEntryIdIs1.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.body %></td>
+        <td><%= comment.status %></td>
+        <td><%= comment.entry_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>Entryのid:1(title:はじめてのエントリー)に紐づくComment</h2>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>body</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @entriesWhereCommentStatusIsUnapproved.each do |entry| %>
+      <tr>
+        <td><%= entry.id %></td>
+        <td><%= entry.title %></td>
+        <td><%= entry.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
 <%= link_to 'New Entry', new_entry_path %>
