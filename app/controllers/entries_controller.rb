@@ -5,8 +5,16 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = Entry.all
-    @commentsWhereEntryIdIs1 = Comment.select(:id, :body, :status, :entry_id).where(entry_id: 1)
-    @entriesWhereCommentStatusIsUnapproved = Entry.select('entries.id, entries.title, entries.body').joins(:comments).where(comments: {status: 'unapproved'} )
+    @commentsWhereEntryIdEq1 = Comment.select(:id, :body, :status, :entry_id).where(entry_id: 1)
+    @entriesWhereCommentStatusIsUnapproved = Entry.select("entries.id, entries.title, entries.body").joins(:comments).where(comments: {status: "unapproved"} ).uniq
+    @commentsWhereBlogIdEq1 = Comment.joins(entry: [:blog]).where(blogs: {id: 1}).select("comments.id, comments.body, comments.status, comments.entry_id")
+
+    blogTable = Blog.arel_table
+    groupTable = Entry.arel_table
+    condition = groupTable[:blog_id].eq(blogTable[:id])
+    @blogsWhereNotExistsEntry = Blog.where(Entry.where(condition).exists.not).all.select("blogs.id, blogs.title")
+
+    @blogsWhereCommentsEqUnapproved = Blog.joins(entries: [:comments]).where(comments: {status: "unapproved"}).select("blogs.id, blogs.title").uniq
   end
 
   # GET /entries/1

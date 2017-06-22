@@ -38,7 +38,7 @@
   </thead>
 
   <tbody>
-    <% @commentsWhereEntryIdIs1.each do |comment| %>
+    <% @commentsWhereEntryIdEq1.each do |comment| %>
       <tr>
         <td><%= comment.id %></td>
         <td><%= comment.body %></td>
@@ -67,6 +67,73 @@
         <td><%= entry.id %></td>
         <td><%= entry.title %></td>
         <td><%= entry.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>Blogのid:1に紐づくすべてのComment</h2>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>body</th>
+      <th>status</th>
+      <th>entry_id</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commentsWhereBlogIdEq1.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.body %></td>
+        <td><%= comment.status %></td>
+        <td><%= comment.entry_id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>まだEntryを書いていないBlog</h2>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blogsWhereNotExistsEntry.each do |blog| %>
+      <tr>
+        <td><%= blog.id %></td>
+        <td><%= blog.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>statusがunapprovedであるCommentがあるEntryのあるBlog</h2>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blogsWhereCommentsEqUnapproved.each do |blog| %>
+      <tr>
+        <td><%= blog.id %></td>
+        <td><%= blog.title %></td>
       </tr>
     <% end %>
   </tbody>
