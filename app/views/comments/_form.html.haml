@@ -6,5 +6,14 @@
         - @comment.errors.full_messages.each do |message|
           %li= message
 
+  .field
+    = f.label :body
+    = f.text_area :body
+  .field
+    = f.label :status
+    = f.text_field :status
+  .field
+    = f.label :entry_id
+    = f.number_field :entry_id
   .actions
     = f.submit 'Save'
