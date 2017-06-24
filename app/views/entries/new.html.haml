@@ -1,5 +1,3 @@
 %h1 New Entry
 
-= render 'form', entry: @entry
-
-= link_to 'Back', entries_path
+= render 'form', entry: @entry, url: blog_entry_path(params[:blog_id])

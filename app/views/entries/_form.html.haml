@@ -15,5 +15,7 @@
     = form.label :body
     = form.text_area :body, id: :entry_body
 
+  = yield(form: form)
+
   %div{class: "actions"}
     = form.submit

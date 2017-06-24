@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :blogs do
+  resources :blogs, shallow: true do
     resources :entries do
       resources :comments
     end
