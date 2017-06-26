@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:new, :create]
 
   # GET /entries
   # GET /entries.json
@@ -34,11 +35,11 @@ class EntriesController < ApplicationController
   # POST /entries
   # POST /entries.json
   def create
-    @entry = Entry.new(entry_params)
+    @entry = Entry.new(entry_params.merge(params.permit(:blog_id).to_h))
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to blog_entry_path(@entry.blog_id), notice: 'Entry was successfully created.' }
+        format.html { redirect_to blog_entries_path(@entry.blog_id), notice: 'Entry was successfully created.' }
         format.json { render :show, status: :created, location: @entry }
       else
         format.html { render :new }
@@ -75,6 +76,10 @@ class EntriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
       @entry = Entry.find(params[:id])
+    end
+
+    def set_blog
+      @blog = Blog.find(params[:blog_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

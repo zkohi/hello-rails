@@ -1,7 +1,6 @@
 %h1 Editing Entry
 
-= render 'form', entry: @entry
-/= render partial: 'form', layout: "layout_form", locals: { entry: @entry, url: edit_entry_path(@entry) }
+= render partial: 'form', locals: { entry: @entry, url: entry_path }
 
 = link_to 'Show', @entry
 
