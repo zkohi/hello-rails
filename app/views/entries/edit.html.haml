@@ -2,6 +2,5 @@
 
 = render partial: 'form', locals: { entry: @entry, url: entry_path }
 
-= link_to 'Show', @entry
-
+= link_to 'Show', blog_entry_path(@entry.blog_id)
 

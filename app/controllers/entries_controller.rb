@@ -22,7 +22,7 @@ class EntriesController < ApplicationController
   # POST /entries
   # POST /entries.json
   def create
-    @entry = Entry.new(entry_params.merge(params.permit(:blog_id).to_h))
+    @entry = Entry.new(entry_params.merge({blog_id: params[:blog_id]}))
 
     respond_to do |format|
       if @entry.save
