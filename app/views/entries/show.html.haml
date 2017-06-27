@@ -10,9 +10,9 @@
   %strong Body:
   = @entry.body
 
-= link_to 'Edit', edit_entry_path(@entry.blog_id)
+= link_to 'Edit', edit_entry_path(@entry)
 |
-= link_to 'Back', blog_entries_path(@entry.blog_id)
+= link_to 'Back', blog_path(@entry.blog_id)
 
 %h2 Listing comments
 
