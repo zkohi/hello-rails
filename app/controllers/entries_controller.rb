@@ -1,10 +1,11 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_entry, only: [:edit, :update, :destroy]
   before_action :set_blog, only: [:new, :create, :show]
 
   # GET /entries/1
   # GET /entries/1.json
   def show
+    @entry = Entry.joins(:blog).where(entries: {id: params[:id], blog_id: params[:blog_id]}).take!
     @comments = Comment.joins(entry: [:blog]).where(entries: {id: params[:id], blog_id: params[:blog_id]})
     @comment = Comment.new
   end
