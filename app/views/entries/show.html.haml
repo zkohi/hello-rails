@@ -1,5 +1,7 @@
 %p{id: "notice"}= notice
 
+%h2= @entry.blog.title
+
 %p
   %strong Title:
   = @entry.title
@@ -8,4 +10,44 @@
   %strong Body:
   = @entry.body
 
-= link_to 'Edit', edit_entry_path(@entry)
+= link_to 'Edit', edit_entry_path(@entry.blog_id)
+|
+= link_to 'Back', blog_entries_path(@entry.blog_id)
+
+%h2 Listing comments
+
+%table
+  %thead
+    %tr
+      %th Body
+      %th
+      %th
+
+  %tbody
+    - @comments.each do |comment|
+      %tr
+        - if comment.status == 'unapproved'
+          %td (承認待ち)
+          %td= link_to 'Approved', approve_comment_path(comment), method: :patch, data: { confirm: 'Are you sure?' }
+        - else
+          %td= comment.body
+          %td
+        %td= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }
+
+%h2 New Comment
+
+= form_with(model: @comment, url: blog_entry_comments_path(@entry.blog_id, @entry), local: true) do |form|
+  - if @comment.errors.any?
+    %div{id: "error_explanation"}
+      %h2= #{pluralize(@comment.errors.count, "error")} "prohibited this comment from being saved:"
+
+      %ul
+        - @comment.errors.full_messages.each do |message|
+          %li= message
+
+  %div{class: "field"}
+    = form.label :body
+    = form.text_area :body, id: :entry_body
+
+  %div{class: "actions"}
+    = form.submit 'Save'

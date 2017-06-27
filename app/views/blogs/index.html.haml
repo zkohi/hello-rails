@@ -16,4 +16,89 @@
 
 %br
 
+%h2 Entryのid:1(title:はじめてのエントリー)に紐づくComment
+%table
+  %thead
+    %tr
+      %th id
+      %th body
+      %th status
+      %th entry_id
+
+  %tbody
+    - @commentsWhereEntryIdEq1.each do |comment|
+      %tr
+        %td= comment.id
+        %td= comment.body
+        %td= comment.status
+        %td= comment.entry_id
+
+%br
+
+%h2 Entryのid:1(title:はじめてのエントリー)に紐づくComment
+%table
+  %thead
+    %tr
+      %th id
+      %th title
+      %th body
+
+  %tbody
+    - @entriesWhereCommentStatusIsUnapproved.each do |entry|
+      %tr
+        %td= entry.id
+        %td= entry.title
+        %td= entry.body
+
+%br
+
+%h2 Blogのid:1に紐づくすべてのComment
+%table
+  %thead
+    %tr
+      %th id
+      %th body
+      %th status
+      %th entry_id
+
+  %tbody
+    - @commentsWhereBlogIdEq1.each do |comment|
+      %tr
+        %td= comment.id
+        %td= comment.body
+        %td= comment.status
+        %td= comment.entry_id
+
+%br
+
+%h2 まだEntryを書いていないBlog
+%table
+  %thead
+    %tr
+      %th id
+      %th title
+
+  %tbody
+    - @blogsWhereNotExistsEntry.each do |blog|
+      %tr
+        %td= blog.id
+        %td= blog.title
+
+%br
+
+%h2 statusがunapprovedであるCommentがあるEntryのあるBlog
+%table
+  %thead
+    %tr
+      %th id
+      %th title
+
+  %tbody
+    - @blogsWhereCommentsEqUnapproved.each do |blog|
+      %tr
+        %td= blog.id
+        %td= blog.title
+
+%br
+
 = link_to 'New Blog', new_blog_path
