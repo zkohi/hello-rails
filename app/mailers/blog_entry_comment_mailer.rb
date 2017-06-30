@@ -1,0 +1,2 @@
+class BlogEntryCommentMailer < ApplicationMailer
+end
