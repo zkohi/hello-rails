@@ -55,6 +55,7 @@ group :development do
   gem "letter_opener"
   gem "bullet"
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
