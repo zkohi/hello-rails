@@ -9,6 +9,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        # send mail
+        BlogEntryCommentMailer.post_comment_email(@entry, @comment).deliver_now
+
         format.html { redirect_to blog_entry_path(@entry.blog_id, @entry), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
@@ -47,7 +50,7 @@ class CommentsController < ApplicationController
     end
 
     def set_entry
-      @entry = Entry.joins(:blog).where(entries: {id: params[:entry_id], blog_id: params[:blog_id]}).take!
+      @entry = Entry.joins(:blog).where(entries: {id: params[:entry_id], blog_id: params[:blog_id]}).select("entries.id, entries.title, entries.blog_id, blogs.title as blog_title").take!
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

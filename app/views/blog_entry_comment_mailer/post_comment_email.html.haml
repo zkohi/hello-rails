@@ -1,0 +1,18 @@
+%h2 新しいコメントが登録されました。
+
+%div
+  承認または削除してください。
+  %p
+    Blog: 
+    %span= @entry.blog_title
+  %p
+    Entry: 
+    %span= @entry.title
+  %p
+    Comment:
+    %span= @comment.body
+
+  %p
+    URL:
+    %span= blog_entry_url(@entry.blog_id, @entry.id)
+
