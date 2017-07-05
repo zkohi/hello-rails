@@ -36,6 +36,10 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
+  gem 'factory_girl_rails'
+  gem 'capybara'
 end
 
 group :development do
@@ -54,9 +58,9 @@ group :development do
   gem 'binding_of_caller'
   gem "letter_opener"
   gem "bullet"
-  gem 'rspec-rails', '~> 3.5'
-  gem 'rails-controller-testing'
-  gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'spring-commands-rspec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

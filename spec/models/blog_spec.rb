@@ -3,16 +3,16 @@ require 'support/factory_girl'
 
 RSpec.describe Blog, type: :model do
 
-  subject { blog.valid? }
+  subject { blog }
 
   context 'with title' do
-    let(:blog) { build(:blog) }
+    let(:blog) { FactoryGirl.build(:blog) }
 
-    it { is_expected.to be_truthy }
+    it { is_expected.to be_valid }
   end
   context 'without title' do
-    let(:blog) { build(:blog, title: '') }
+    let(:blog) { FactoryGirl.build(:blog, title: '') }
 
-    it { is_expected.to be_falsy }
+    it { is_expected.not_to be_valid }
   end
 end
