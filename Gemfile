@@ -69,3 +69,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Haml
 gem 'haml-rails'
 
+group :production do
+  # rails_12factor
+  gem 'rails_12factor'
+end
+
+ruby "2.4.1"
