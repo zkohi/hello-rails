@@ -72,6 +72,7 @@ gem 'haml-rails'
 group :production do
   # rails_12factor
   gem 'rails_12factor'
+  gem 'sendgrid-ruby'
 end
 
 ruby "2.4.1"
